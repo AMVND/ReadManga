@@ -1,39 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
-import { auth, db, logout } from "../auth/firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import React from "react";
+import MangaCard from "../mangacomponents/MangaCard";
+
 function Home() {
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
-  const fetchUserName = async () => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      setName(data.name);
-    } catch (err) {
-      console.error(err);
-      alert("An error occured while fetching user data");
-    }
-  };
-  useEffect(() => {
-    if (loading) return;
-    if (!user) return navigate("/");
-    fetchUserName();
-  }, [user, loading]);
+
   return (
-    <div className="dashboard">
-       <div className="dashboard__container">
-        Logged in as
-         <div>{name}</div>
-         <div>{user?.email}</div>
-         <button className="dashboard__btn" onClick={logout}>
-          Logout
-         </button>
-       </div>
-     </div>
+    <div className="min-h-full">
+      {/* NAVBAR */}
+        <header className="bg-white shadow">
+          <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900"></h1>
+          </div>
+        </header>
+        <main>
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+              <MangaCard/>
+          </div>
+        </main>
+      </div>
   );
 }
 export default Home;

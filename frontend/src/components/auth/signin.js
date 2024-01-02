@@ -2,20 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 export default function Signin() {
 
   const [email, setEmail] = useState("");
@@ -27,7 +14,7 @@ export default function Signin() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/dashboard");
+    if (user) navigate("/");
   }, [user, loading]);
 
   return (
@@ -98,17 +85,16 @@ export default function Signin() {
                 Sign in
               </button>
             </div>
-            <div>
+            <div className="flex items-center justify-center dark:bg-gray-800">
               <button
                 type="submit"
                 onClick={signInWithGoogle}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in with Google
+                className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+                <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
+                <span>Login with Google</span>
               </button>
             </div>
           </form>
-
           <p className="mt-10 text-center text-sm text-gray-500">
             <a href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Sign Up Now

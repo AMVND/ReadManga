@@ -19,7 +19,7 @@ function Signup() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/");
   }, [user, loading]);
   return (
     <div className="register">
